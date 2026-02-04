@@ -139,6 +139,27 @@ openclaw gateway health
 UI 텍스트(`│  ◻ amazon-bedrock/...`)가 모델명으로 들어가는 버그 있음.
 항상 이 스킬을 통해 직접 편집할 것.
 
+## 보안 검증 (Verification)
+
+이 스킬은 로컬 config 파일을 직접 수정하므로, 향후 검증이 필요할 수 있다.
+
+### 가능한 검증 방법
+
+| 방법 | 설명 |
+|------|------|
+| **Git commit signing** | `git commit -S` 로 GPG/SSH 서명 추가. GitHub에서 "Verified" 뱃지 확인 가능 |
+| **SLSA Provenance** | GitHub Actions에서 빌드 출처 증명 메타데이터 생성 (SLSA Level 1~3) |
+| **SHA256 체크섬** | `sha256sum SKILL.md` 로 파일 무결성 확인. README나 release에 해시 기록 |
+| **git log --show-signature** | 커밋 서명 검증. 변조 여부 확인 |
+| **GitHub audit log** | Private repo 접근 기록 확인 (Settings > Audit log) |
+
+### 최소 권장 사항
+
+1. Private repo 유지
+2. 실제 토큰/키 값은 절대 커밋하지 않음
+3. 테스트는 mock 데이터(`FAKE_*`)로만 수행
+4. 변경 시 커밋 메시지에 변경 사유 명시
+
 ---
 
 *생성일: 2026-02-04*
